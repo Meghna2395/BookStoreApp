@@ -1,0 +1,5 @@
+20:27:04,427 DEBUG com.bridgelabz.pom.Base<strong>{1}</strong>:30 - Open Website
+20:27:04,600  INFO com.bridgelabz.pom.Base<strong>{1}</strong>:32 - Maximize the window
+20:27:04,766  INFO com.bridgelabz.pom.Base<strong>{1}</strong>:37 - Email has been entered
+20:27:04,866 FATAL com.bridgelabz.pom.Base<strong>{1}</strong>:39 - Entering the password
+20:27:07,519 ERROR com.bridgelabz.pom.Base<strong>{1}</strong>:41 - Clicking on the login button
