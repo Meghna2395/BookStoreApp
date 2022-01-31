@@ -15,24 +15,13 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class DataDrivenTest {
-
-	WebDriver driver;
-
-	@BeforeTest
-	public void testSetup() {
-
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\asus\\OneDrive\\Desktop\\chromedriver.exe");
-		driver = new ChromeDriver();
-		driver.manage().window().maximize();
-
-	}
+public class DataDrivenTest extends Base {
 
 	@Test(dataProvider = "LoginData")
 	public void loginTest(String email, String Password, String exp) {
 		driver.get("https://www.bookswagon.com/login");
 
-		WebElement txtEmail = driver.findElement(By.id("ctl00_phBody_SignIn_txtEmail"));
+		WebElement txtEmail = driver.findElement(By.xpath("//*[@name='ctl00$phBody$SignIn$txtEmail']"));
 		txtEmail.sendKeys(email);
 
 		WebElement txtPassword = driver.findElement(By.id("ctl00_phBody_SignIn_txtPassword"));
@@ -42,24 +31,17 @@ public class DataDrivenTest {
 		String exp_title = "https://www.bookswagon.com/myaccount.aspx";
 		String actualTitle = driver.getTitle();
 
-		if (exp.equals("Valid")) {
+		if (exp.equals("valid")) {
 			if (exp_title.equals(actualTitle)) {
 				Assert.assertTrue(true);
 			} else {
-				Assert.assertTrue(false);
-			}
-
-		} else if (exp.equals("Invalid"))
-			;
-		{
-			if (exp_title.equals(actualTitle)) {
 				Assert.assertTrue(false);
 			}
 		}
 
 	}
 
-	@DataProvider(name = "LoginData")
+	@DataProvider(name = "LoginData") //returns a double Object class array with two sets of data
 	public String[][] getData() throws IOException {
 		String path = "C:\\Users\\asus\\eclipse-workspace\\BookSwagonStore\\ExcelData\\loginSheet.xlsx";
 
@@ -74,6 +56,7 @@ public class DataDrivenTest {
 			}
 		}
 		return loginData;
+
 	}
 
 	@AfterTest

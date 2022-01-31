@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.bridgelabz.test.DataDrivenTest">
+      <class name="com.bridgelabz.test.BookSwagonTestForPositiveScenario">
         <methods>
           <include name="testSetup"/>
-          <include name="loginTest"/>
           <include name="tearDown"/>
+          <include name="verifyIsCartEmpty"/>
         </methods>
-      </class> <!-- com.bridgelabz.test.DataDrivenTest -->
+      </class> <!-- com.bridgelabz.test.BookSwagonTestForPositiveScenario -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

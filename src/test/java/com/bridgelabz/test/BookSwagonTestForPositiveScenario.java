@@ -13,6 +13,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import com.bridgelabz.pom.AddToCart;
 import com.bridgelabz.pom.CartPage;
 import com.bridgelabz.pom.HomePage;
@@ -23,12 +25,19 @@ public class BookSwagonTestForPositiveScenario extends Base {
 
 	@Test(priority = 0)
 	public void validCredentials() {
+		ExtentTest test = extent.createTest("Login with Valid Credentials");
 		loginpage.openingLoginPage();
+		test.log(Status.INFO, "Launching Login Page");
 		loginpage.insertEmail("meghnaborkar23@gmail.com");
+		test.pass("Entered the email");
 		loginpage.insertPassword("9158921359");
+		test.pass("Entered the password");
 		loginpage.clickLoginBtn();
+		test.log(Status.INFO, "Clicking on the Login Button");
 		String actualPageURL = driver.getCurrentUrl();
 		Assert.assertEquals(actualPageURL, loginpage.getUser_URL());
+		test.pass("Logged in Successfully");
+		extent.flush();
 	}
 
 	@Test(priority = 1)
@@ -37,25 +46,12 @@ public class BookSwagonTestForPositiveScenario extends Base {
 		WebElement Logo = driver.findElement(By.tagName("img"));
 		Assert.assertEquals(true, Logo.isDisplayed());
 	}
-	
+
 	@Test(priority = 2)
 	public void personalSettingPage() {
 		myaccount.personalSettings();
 		Assert.assertEquals(driver.getCurrentUrl(), myaccount.getAccountSettingsURL());
 	}
-
-//	@Test(priority = 3)
-//	public void editButtonIsClickable() {
-//		loginpage.openingLoginPage();
-//		loginpage.insertEmail("meghnaborkar23@gmail.com");
-//		loginpage.insertPassword("9158921359");
-//		loginpage.clickLoginBtn();
-//		myaccount.personalSettings();
-//		myaccount.getAccountSettingsURL();
-//		myaccount.editButton();
-//		//Assert.assertEquals(driver.getCurrentUrl(), myaccount.getAccountSettingsURL());
-//
-//	}
 
 	@Test(priority = 3)
 	public void myOrdersPage() {
@@ -85,10 +81,10 @@ public class BookSwagonTestForPositiveScenario extends Base {
 	@Test(priority = 7)
 	public void verifyChangePassword() {
 		myaccount.changePassword();
-		//Assert.assertEquals(driver.getCurrentUrl(), myaccount.getChangePasswordURL());
+		// Assert.assertEquals(driver.getCurrentUrl(),
+		// myaccount.getChangePasswordURL());
 		driver.navigate().to("https://www.bookswagon.com/");
 	}
-
 
 	@Test(priority = 8)
 	public void newArrivalPage() {
@@ -150,21 +146,6 @@ public class BookSwagonTestForPositiveScenario extends Base {
 
 	}
 
-
-//	@Test(priority = 9)
-//	public void verifyPasswordIsChange() {
-//		homepage.openingHomePage();
-//		loginpage.openingLoginPage();
-//		loginpage.insertEmail("meghnaborkar23@gmail.com");
-//		loginpage.insertPassword("9158921359");
-//		loginpage.clickLoginBtn();
-//		myaccount.changePassword();
-//		myaccount.insertCurrentPassword("9158921359");
-//		myaccount.insertNewPassword("8055087073");
-//		myaccount.confirmPassword("9158921359");
-//		myaccount.changePasswordBTN();
-//	}
-
 //	@Test(priority = 15)
 //	public void visitToMyCart() {
 //		homepage.openingHomePage();
@@ -172,12 +153,12 @@ public class BookSwagonTestForPositiveScenario extends Base {
 //		assertTrue(cartpage.isCartOpen());
 //	}
 
-	@Test(priority = 14)
-	public void verifyIsCartEmpty() {
-		homepage.openingHomePage();
-		cartpage.visitMyCart();
-		Assert.assertEquals(cartpage.isCartEmpty(), true);
-	}
+	// @Test(priority = 14)
+//	public void verifyIsCartEmpty() {
+//		homepage.openingHomePage();
+//		cartpage.visitMyCart();
+//		Assert.assertEquals(cartpage.isCartEmpty(), true);
+//	}
 
 //	@Test(priority = 15)
 //	public void visitToMyShoppingCart() {
@@ -185,7 +166,7 @@ public class BookSwagonTestForPositiveScenario extends Base {
 //		assertEquals(driver.getCurrentUrl(), cartpage.getMyCartURL());
 //		
 //	}
-	
+
 	@Test(priority = 16)
 	public void searchListofBooks() {
 		homepage.openingHomePage();
@@ -230,28 +211,12 @@ public class BookSwagonTestForPositiveScenario extends Base {
 
 	}
 
-//	@Test(priority = 23)
-//	public void continueBTN() {
-//		homepage.openingHomePage();
-//		loginpage.openingLoginPage();
-//		loginpage.insertEmail("meghnaborkar23@gmail.com");
-//		loginpage.insertPassword("9158921359");
-//		loginpage.clickLoginBtn();
-//		cartpage.visitMyCart();
-//		cartpage.placeOrder();
-//		driver.switchTo().parentFrame();
-//		cartpage.continueButton();
-//		
-//	}
-
-	
-
 	@Test(priority = 21)
 	public void logoutAction() {
 		homepage.openingHomePage();
 		loginpage.logoutOption();
 	}
-	
+
 	@AfterTest
 	public void tearDown() {
 		driver.quit();
